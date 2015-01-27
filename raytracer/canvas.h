@@ -21,11 +21,16 @@ public:
 	int GetWidth();
 	int GetHeight();
 
+	void BeginDraw();
+	void EndDraw();
+
 private:
 	HWND hWnd;
 	HDC hDC;
 	int width;
 	int height;
+
+	std::vector<COLORREF> pixels;
 };
 
 }

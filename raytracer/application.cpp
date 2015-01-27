@@ -138,18 +138,12 @@ LRESULT Application::MainLoop()
 	return 0;
 }
 
-Canvas* Application::BeginDraw()
+Canvas* Application::GetCanvas()
 {
 	if (hAppWindow == NULL) return NULL;
 
 	Canvas* canvas = new Canvas(hAppWindow, width, height);
 	return canvas;
-}
-
-void Application::EndDraw(Canvas** canvas)
-{
-	delete *canvas;
-	*canvas = 0;
 }
 
 void Application::SetConsoleVisible(bool isVisible)

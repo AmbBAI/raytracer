@@ -3,6 +3,8 @@
 
 #include <cstdio>
 
+#include <vector>
+
 #include <Windows.h>
 
 

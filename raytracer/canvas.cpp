@@ -10,6 +10,11 @@ Canvas::Canvas(HWND hWnd, int width, int height)
 	this->hDC = ::GetDC(hWnd);
 	this->width = width;
 	this->height = height;
+
+	if (width > 0 && height > 0)
+	{
+		pixels.assign(width * height, 0);
+	}
 }
 
 Canvas::~Canvas()
@@ -23,9 +28,7 @@ bool Canvas::SetPixel(int x, int y, const Color& color)
 	if (x < 0 || x >= width) return false;
 	if (y < 0 || y >= height) return false;
 
-	
-
-	COLORREF ret = ::SetPixel(this->hDC, x, y, (COLORREF)(color.argb & 0x00ffffff));
+	pixels[y * width + x] = RGB((color.r()), (color.g()), (color.b()));
 	return true;
 }
 
@@ -38,5 +41,23 @@ int Canvas::GetHeight()
 {
 	return height;
 }
+
+void Canvas::BeginDraw()
+{
+
+}
+
+void Canvas::EndDraw()
+{
+	HDC hDCMem = CreateCompatibleDC(hDC);
+	HBITMAP bitmap = ::CreateBitmap(width, height, 1, 32, &pixels[0]);
+	::SelectObject(hDCMem, bitmap);
+	
+	::BitBlt(hDC, 0, 0, width, height, hDCMem, 0, 0, SRCCOPY);
+
+	::DeleteDC(hDCMem);
+}
+
+
 
 }
