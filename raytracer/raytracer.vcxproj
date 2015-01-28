@@ -27,7 +27,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -77,15 +77,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="canvas.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mathf.cpp" />
+    <ClCompile Include="ray3.cpp" />
+    <ClCompile Include="sphere.cpp" />
+    <ClCompile Include="vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="canvas.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="header.h" />
+    <ClInclude Include="mathf.h" />
+    <ClInclude Include="ray3.h" />
+    <ClInclude Include="sphere.h" />
+    <ClInclude Include="vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

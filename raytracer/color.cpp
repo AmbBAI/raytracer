@@ -6,11 +6,6 @@ namespace rt
 const Color Color::white = Color(1.f, 1.f, 1.f, 1.f);
 const Color Color::black = Color(1.f, 0.f, 0.f, 0.f);
 
-Color::Color()
-	: a(1.f), r(0.f), g(0.f), b(0.f)
-{
-}
-
 Color::Color(float _a, float _r, float _g, float _b)
 	: a(_a), r(_r), g(_g), b(_b)
 {
@@ -32,11 +27,6 @@ Color::Color(const Color32& _color32)
 
 const Color32 Color32::white = Color32(0xffffffff);
 const Color32 Color32::black = Color32(0xff000000);
-
-Color32::Color32()
-	: argb(0xff000000)
-{
-}
 
 Color32::Color32(u32 _argb)
 	: argb(_argb)
