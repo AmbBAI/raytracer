@@ -7,5 +7,7 @@
 
 #include <Windows.h>
 
+typedef unsigned char u8;
+typedef unsigned int u32;
 
 #endif // !_HEADER_H_

@@ -29,7 +29,7 @@ void MainLoop()
 		for (int x = 0; x < w; ++x)
 		{
 			canvas->SetPixel(x, y,
-				rt::Color(255, (int)((float)x / w * 255), (int)((float)y / h * 255), 0));
+				rt::Color32(255, (int)((float)x / w * 255), (int)((float)y / h * 255), 0));
 		}
 	}
 

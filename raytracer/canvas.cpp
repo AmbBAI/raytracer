@@ -22,13 +22,13 @@ Canvas::~Canvas()
 	::ReleaseDC(this->hWnd, this->hDC);
 }
 
-bool Canvas::SetPixel(int x, int y, const Color& color)
+bool Canvas::SetPixel(int x, int y, const Color32& color)
 {
 	if (this->hDC == INVALID_HANDLE_VALUE) return false;
 	if (x < 0 || x >= width) return false;
 	if (y < 0 || y >= height) return false;
 
-	pixels[y * width + x] = RGB((color.r()), (color.g()), (color.b()));
+	pixels[y * width + x] = RGB((color.r), (color.g), (color.b));
 	return true;
 }
 

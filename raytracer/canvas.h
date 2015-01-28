@@ -17,7 +17,7 @@ protected:
 	~Canvas();
 
 public:
-	bool SetPixel(int x, int y, const Color& color);
+	bool SetPixel(int x, int y, const Color32& color);
 	int GetWidth();
 	int GetHeight();
 
