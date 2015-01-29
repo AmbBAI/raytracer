@@ -1,5 +1,5 @@
 #include "camera.h"
-#include "mathf.h"
+#include "base/mathf.h"
 
 namespace rt
 {

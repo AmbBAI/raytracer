@@ -25,21 +25,21 @@ bool Application::CreateApplication(HINSTANCE hInstance, const char* title, int 
 {
 	this->hAppInstance = hInstance;
 
-	WNDCLASS wnd_class;
-	ZeroMemory(&wnd_class, sizeof(wnd_class));
-	wnd_class.lpszClassName = "App Window";
-	wnd_class.lpfnWndProc = (WNDPROC)Application::WndProc;
-	wnd_class.style = CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW;
-	wnd_class.hInstance = hInstance;
-	wnd_class.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wnd_class.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wnd_class.lpszMenuName = NULL;
-	wnd_class.cbClsExtra = 0;
-	wnd_class.cbWndExtra = 0;
+	WNDCLASS wndClass;
+	ZeroMemory(&wndClass, sizeof(wndClass));
+	wndClass.lpszClassName = "App Window";
+	wndClass.lpfnWndProc = (WNDPROC)Application::WndProc;
+	wndClass.style = CS_DBLCLKS | CS_VREDRAW | CS_HREDRAW;
+	wndClass.hInstance = hInstance;
+	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	wndClass.lpszMenuName = NULL;
+	wndClass.cbClsExtra = 0;
+	wndClass.cbWndExtra = 0;
 
 	BOOL ret = TRUE;
 
-	ret = RegisterClass(&wnd_class);
+	ret = RegisterClass(&wndClass);
 	if (!ret) return false;
 
 	RECT wndRect;
@@ -59,11 +59,11 @@ bool Application::CreateApplication(HINSTANCE hInstance, const char* title, int 
 
 	int wndWidth = wndRect.right - wndRect.left;
 	int wndHeight = wndRect.bottom - wndRect.top;
-	int work_area_width = workAreaRect.right - workAreaRect.left;
-	int work_area_height = workAreaRect.bottom - workAreaRect.top;
+	int workAreaWidth = workAreaRect.right - workAreaRect.left;
+	int workAreaHeight = workAreaRect.bottom - workAreaRect.top;
 
-	int posX = (work_area_width - wndWidth) / 2;
-	int posY = (work_area_height - wndHeight) / 2;
+	int posX = (workAreaWidth - wndWidth) / 2;
+	int posY = (workAreaHeight - wndHeight) / 2;
 
 	this->hAppWindow = CreateWindow("App Window", title, wndType,
 		posX,
@@ -88,10 +88,10 @@ LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 	Application* ptrApp = Application::GetInstance();
 	if (ptrApp)
 	{
-		BOOL use_def_win_proc = TRUE;
-		LRESULT ge_win_proc_ret = 0;
-		ge_win_proc_ret = ptrApp->MsgProc(uMsg, wParam, lParam, use_def_win_proc);
-		if (!use_def_win_proc) return ge_win_proc_ret;
+		BOOL useDefWinProc = TRUE;
+		LRESULT winProcResult = 0;
+		winProcResult = ptrApp->MsgProc(uMsg, wParam, lParam, useDefWinProc);
+		if (!useDefWinProc) return winProcResult;
 	}
 
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
@@ -113,15 +113,15 @@ LRESULT Application::MainLoop()
 {
 	MSG  msg;
 	PeekMessage(&msg, NULL, 0U, 0U, PM_NOREMOVE);
-	HACCEL h_accel = LoadAccelerators(NULL, MAKEINTRESOURCE(0));
+	HACCEL hAccel = LoadAccelerators(NULL, MAKEINTRESOURCE(0));
 
 	while (WM_QUIT != msg.message)
 	{
-		BOOL has_msg = PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE);
+		BOOL hasMsg = PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE);
 
-		if (has_msg)
+		if (hasMsg)
 		{
-			if (0 == TranslateAccelerator(hAppWindow, h_accel, &msg))
+			if (0 == TranslateAccelerator(hAppWindow, hAccel, &msg))
 			{
 				if (PreTranslateMessage(&msg))
 				{

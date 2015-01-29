@@ -28,7 +28,7 @@ bool Canvas::SetPixel(int x, int y, const Color32& color)
 	if (x < 0 || x >= width) return false;
 	if (y < 0 || y >= height) return false;
 
-	pixels[y * width + x] = (u32)((color.b) | (((u32)color.g) << 8) | (((u32)color.r) << 16));
+	pixels[y * width + x] = color.argb;
 	return true;
 }
 

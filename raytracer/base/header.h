@@ -1,5 +1,5 @@
-#ifndef _HEADER_H_
-#define _HEADER_H_
+#ifndef _RAYTRACER_HEADER_H_
+#define _RAYTRACER_HEADER_H_
 
 #include <cstdio>
 
@@ -16,4 +16,4 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-#endif // !_HEADER_H_
+#endif // !_RAYTRACER_HEADER_H_

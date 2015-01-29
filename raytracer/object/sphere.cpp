@@ -1,11 +1,8 @@
 #include "sphere.h"
-#include "mathf.h"
+#include "base/mathf.h"
 
 namespace rt
 {
-const IntersectResult IntersectResult::noHit = IntersectResult();
-
-
 Sphere::Sphere(const Vector3& _center, float _radius)
 	: center(_center), radius(_radius)
 {
