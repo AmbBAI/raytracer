@@ -30,7 +30,7 @@ private:
 	int width;
 	int height;
 
-	std::vector<COLORREF> pixels;
+	std::vector<u32> pixels;
 };
 
 }

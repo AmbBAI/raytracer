@@ -27,7 +27,7 @@ struct Sphere
 	Sphere(const Vector3& _center, float _radius);
 
 	void Initialize();
-	const IntersectResult& Intersect(const Ray3& ray) const;
+	const IntersectResult Intersect(const Ray3& ray) const;
 
 private:
 	float sqrRadius = 1.f;

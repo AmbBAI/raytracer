@@ -25,6 +25,7 @@ public:
 	static float Round(float f);
 	static float RoundToInt(float f);
 
+	static int Clamp(int value, int min, int max);
 	static float Clamp(float value, float min, float max);
 	static float Clamp01(float value);
 

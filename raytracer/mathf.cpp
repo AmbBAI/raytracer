@@ -50,6 +50,12 @@ float Mathf::Clamp(float value, float min, float max)
 {
 	return value > max ? max : Mathf::Min(value, min);
 }
+
+int Mathf::Clamp(int value, int min, int max)
+{
+	return value > max ? max : (value < min ? min : value);
+}
+
 float Mathf::Clamp01(float value)
 {
 	return Mathf::Clamp(value, 0.f, 1.f);

@@ -23,7 +23,7 @@ struct PerspectiveCamera
 		);
 
 	void Initialize();
-	const Ray3& GenerateRay(float x, float y) const;
+	const Ray3 GenerateRay(float x, float y) const;
 
 private:
 	Vector3 right = Vector3::zero;

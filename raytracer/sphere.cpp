@@ -16,7 +16,7 @@ void Sphere::Initialize()
 	sqrRadius = radius * radius;
 }
 
-const IntersectResult& Sphere::Intersect(const Ray3& ray) const
+const IntersectResult Sphere::Intersect(const Ray3& ray) const
 {
 	Vector3 v = ray.origin.Subtract(center);
 	float a0 = v.SqrLength() - sqrRadius;
@@ -31,8 +31,7 @@ const IntersectResult& Sphere::Intersect(const Ray3& ray) const
 			result.geometry = this;
 			result.distance = -DdotV - Mathf::Sqrt(discr);
 			result.position = ray.GetPoint(result.distance);
-			result.normal = result.position.Subtract(center);
-			result.normal = result.normal.Normalize();
+			result.normal = result.position.Subtract(center).Normalize();
 			return result;
 		}
 	}

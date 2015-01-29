@@ -20,14 +20,14 @@ void PerspectiveCamera::Initialize()
 	fovScale = Mathf::Tan(fov * 0.5f * Mathf::deg2rad) * 2.f;
 }
 
-const Ray3& PerspectiveCamera::GenerateRay(float x, float y) const
+const Ray3 PerspectiveCamera::GenerateRay(float x, float y) const
 {
 	Vector3 r = right.Multiply((x - 0.5f) * fovScale);
 	Vector3 u = up.Multiply((y - 0.5f) * fovScale);
-	Vector3 tmp = r.Add(u);
-	tmp = front.Add(tmp);
-	tmp = tmp.Normalize();
-	return Ray3(eye, tmp);
+	//Vector3 tmp = front.Add(r).Add(u).Normalize();
+	//tmp = front.Add(tmp);
+	//tmp = tmp.Normalize();
+	return Ray3(eye, front.Add(r).Add(u).Normalize());
 }
 
 }
