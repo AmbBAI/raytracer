@@ -18,6 +18,7 @@ protected:
 
 public:
 	bool SetPixel(int x, int y, const Color32& color);
+	bool SetPixel(int x, int y, const Color& color);
 	int GetWidth();
 	int GetHeight();
 

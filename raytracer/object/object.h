@@ -2,6 +2,7 @@
 #define _RAYTRACER_OBJECT_H_
 
 #include "base/ray3.h"
+#include "material/material.h"
 
 namespace rt
 {
@@ -21,8 +22,10 @@ __declspec(selectany) const IntersectResult IntersectResult::noHit = IntersectRe
 
 struct Object
 {
-	virtual void Initialize() = 0;
-	virtual const IntersectResult Intersect(const Ray3& ray) const = 0;
+	Material* material = nullptr;
+
+	virtual void Initialize() {}
+	virtual const IntersectResult Intersect(const Ray3& ray) const { return IntersectResult::noHit; }
 };
 }
 

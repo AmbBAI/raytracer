@@ -19,9 +19,12 @@ void MainLoop()
 {
 	canvas->BeginDraw();
 
-	RenderNormal(canvas,
-		rt::Sphere(rt::Vector3(0, 0, -10), 10),
-		rt::PerspectiveCamera(rt::Vector3(0, 0, 10), rt::Vector3::front, rt::Vector3::up, 90));
+	rt::CheckerMaterial material = rt::CheckerMaterial(0.6f, 1.f);
+	rt::Sphere sphere = rt::Sphere(rt::Vector3(2, 0, -10), 10);
+	sphere.material = &material;
+	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(0, 0, 10), rt::Vector3::front, rt::Vector3::up, 90);
+
+	RenderMaterial(canvas, sphere, camera);
 
 	canvas->EndDraw();
 }

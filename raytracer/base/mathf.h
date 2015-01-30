@@ -23,7 +23,7 @@ public:
 	static float Ceil(float f);
 	static int CeilToInt(float f);
 	static float Round(float f);
-	static float RoundToInt(float f);
+	static int RoundToInt(float f);
 
 	static int Clamp(int value, int min, int max);
 	static float Clamp(float value, float min, float max);

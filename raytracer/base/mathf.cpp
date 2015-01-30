@@ -41,14 +41,14 @@ float Mathf::Round(float f)
 {
 	return ::round(f);
 }
-float Mathf::RoundToInt(float f)
+int Mathf::RoundToInt(float f)
 {
 	return (int)(Mathf::Round(f) + Mathf::epsilon);
 }
 
 float Mathf::Clamp(float value, float min, float max)
 {
-	return value > max ? max : Mathf::Min(value, min);
+	return value > max ? max : Mathf::Max(value, min);
 }
 
 int Mathf::Clamp(int value, int min, int max)

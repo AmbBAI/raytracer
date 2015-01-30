@@ -32,6 +32,11 @@ bool Canvas::SetPixel(int x, int y, const Color32& color)
 	return true;
 }
 
+bool Canvas::SetPixel(int x, int y, const Color& color)
+{
+	return SetPixel(x, y, Color32(color));
+}
+
 int Canvas::GetWidth()
 {
 	return width;

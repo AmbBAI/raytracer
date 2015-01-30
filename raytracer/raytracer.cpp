@@ -76,3 +76,36 @@ void RenderNormal(Canvas* canvas, Object& scene, Camera& camera)
 		}
 	}
 }
+
+void RenderMaterial(rt::Canvas* canvas, rt::Object& scene, rt::Camera& camera)
+{
+	scene.Initialize();
+	camera.Initialize();
+
+	int w = canvas->GetWidth();
+	int h = canvas->GetHeight();
+
+	//rt::Ray3 ray = camera.GenerateRay(0.25, 0.5);
+	//rt::IntersectResult result = scene.Intersect(ray);
+
+	int i = 0;
+	for (int y = 0; y < h; ++y)
+	{
+		float sy = 1.f - (float)y / h;
+		for (int x = 0; x < w; ++x)
+		{
+			float sx = (float)x / w;
+			Ray3 ray = camera.GenerateRay(sx, sy);
+			IntersectResult result = scene.Intersect(ray);
+			if (result.geometry)
+			{
+				Color color = Color::black;
+				if (Material* material = result.geometry->material)
+				{
+					color = material->Sample(ray, result.position, result.normal);
+				}
+				canvas->SetPixel(x, y, color);
+			}
+		}
+	}
+}
