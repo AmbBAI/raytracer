@@ -2,7 +2,7 @@
 #define _RAYTRACER_HEADER_H_
 
 #include <cstdio>
-
+#include <ctime>
 #ifndef _USE_MATH_DEFINES
 #define _USE_MATH_DEFINES
 #endif

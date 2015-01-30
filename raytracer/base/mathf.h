@@ -10,6 +10,7 @@ class Mathf
 {
 public:
 	static const float epsilon;
+	static const float inifinity;
 	static const float PI;
 	static const float deg2rad;
 	static const float rad2deg;

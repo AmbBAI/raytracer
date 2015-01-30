@@ -17,7 +17,7 @@ void TestColor(Canvas* canvas)
 	}
 }
 
-void RenderDepth(Canvas* canvas, Object& scene, Camera& camera, float maxDepth)
+void RenderDepth(Canvas* canvas, Geometry& scene, Camera& camera, float maxDepth)
 {
 	scene.Initialize();
 	camera.Initialize();
@@ -45,7 +45,7 @@ void RenderDepth(Canvas* canvas, Object& scene, Camera& camera, float maxDepth)
 	}
 }
 
-void RenderNormal(Canvas* canvas, Object& scene, Camera& camera)
+void RenderNormal(Canvas* canvas, Geometry& scene, Camera& camera)
 {
 	scene.Initialize();
 	camera.Initialize();
@@ -77,7 +77,7 @@ void RenderNormal(Canvas* canvas, Object& scene, Camera& camera)
 	}
 }
 
-void RenderMaterial(rt::Canvas* canvas, rt::Object& scene, rt::Camera& camera)
+void RenderMaterial(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera)
 {
 	scene.Initialize();
 	camera.Initialize();

@@ -4,12 +4,12 @@
 #include "base/header.h"
 #include "base/vector3.h"
 #include "base/ray3.h"
-#include "object.h"
+#include "geometry.h"
 
 namespace rt
 {
 
-struct Sphere : Object
+struct Sphere : Geometry
 {
 	Sphere(const Vector3& _center, float _radius);
 

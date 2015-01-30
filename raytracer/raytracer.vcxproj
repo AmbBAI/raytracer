@@ -84,12 +84,15 @@
     <ClCompile Include="camera\camera.cpp" />
     <ClCompile Include="base\canvas.cpp" />
     <ClCompile Include="base\color.cpp" />
+    <ClCompile Include="geometry\union.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="base\mathf.cpp" />
     <ClCompile Include="base\ray3.cpp" />
     <ClCompile Include="material\checker_material.cpp" />
+    <ClCompile Include="material\phong_material.cpp" />
+    <ClCompile Include="geometry\plane.cpp" />
     <ClCompile Include="raytracer.cpp" />
-    <ClCompile Include="object\sphere.cpp" />
+    <ClCompile Include="geometry\sphere.cpp" />
     <ClCompile Include="base\vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -100,10 +103,13 @@
     <ClInclude Include="base\header.h" />
     <ClInclude Include="base\mathf.h" />
     <ClInclude Include="base\ray3.h" />
+    <ClInclude Include="geometry\union.h" />
     <ClInclude Include="material\checker_material.h" />
     <ClInclude Include="material\material.h" />
-    <ClInclude Include="object\object.h" />
-    <ClInclude Include="object\sphere.h" />
+    <ClInclude Include="material\phong_material.h" />
+    <ClInclude Include="geometry\geometry.h" />
+    <ClInclude Include="geometry\plane.h" />
+    <ClInclude Include="geometry\sphere.h" />
     <ClInclude Include="base\vector3.h" />
     <ClInclude Include="raytracer.h" />
   </ItemGroup>

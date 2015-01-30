@@ -1,5 +1,5 @@
-#ifndef _RAYTRACER_OBJECT_H_
-#define _RAYTRACER_OBJECT_H_
+#ifndef _RAYTRACER_GEOMETRIES_H_
+#define _RAYTRACER_GEOMETRIES_H_
 
 #include "base/ray3.h"
 #include "material/material.h"
@@ -7,10 +7,10 @@
 namespace rt
 {
 
-struct Object;
+struct Geometry;
 struct IntersectResult
 {
-	const Object* geometry = nullptr;
+	const Geometry* geometry = nullptr;
 	float distance = 0;
 	Vector3 position = Vector3::zero;
 	Vector3 normal = Vector3::zero;
@@ -20,7 +20,7 @@ struct IntersectResult
 
 __declspec(selectany) const IntersectResult IntersectResult::noHit = IntersectResult();
 
-struct Object
+struct Geometry
 {
 	Material* material = nullptr;
 
@@ -29,4 +29,4 @@ struct Object
 };
 }
 
-#endif //!_RAYTRACER_OBJECT_H_
+#endif //!_RAYTRACER_GEOMETRIES_H_
