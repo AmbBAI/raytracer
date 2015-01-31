@@ -109,3 +109,50 @@ void RenderMaterial(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera)
 		}
 	}
 }
+
+const Color RayTraceRecursive(rt::Geometry& scene, const Ray3& ray, int maxReflect)
+{
+	IntersectResult result = scene.Intersect(ray);
+
+	if (result.geometry && result.geometry->material)
+	{
+		float reflectiveness = result.geometry->material->reflectiveness;
+		Color color = result.geometry->material->Sample(ray, result.position, result.normal);
+		color = color.Multiply(1.f - reflectiveness);
+
+		if (reflectiveness > 0.f && maxReflect > 0)
+		{
+			Vector3 r = result.normal.Multiply(-2 * result.normal.Dot(ray.direction)).Add(ray.direction);
+			Ray3 reflectedRay = Ray3(result.position, r);
+			Color reflectedColor = RayTraceRecursive(scene, reflectedRay, maxReflect - 1);
+			color = color.Add(reflectedColor.Multiply(reflectiveness));
+		}
+		return color;
+	}
+	return Color::black;
+}
+
+void RenderRayTraceReflection(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera, int maxReflect)
+{
+	scene.Initialize();
+	camera.Initialize();
+
+	int w = canvas->GetWidth();
+	int h = canvas->GetHeight();
+
+	//rt::Ray3 ray = camera.GenerateRay(0.25, 0.5);
+	//rt::IntersectResult result = scene.Intersect(ray);
+
+	int i = 0;
+	for (int y = 0; y < h; ++y)
+	{
+		float sy = 1.f - (float)y / h;
+		for (int x = 0; x < w; ++x)
+		{
+			float sx = (float)x / w;
+			Ray3 ray = camera.GenerateRay(sx, sy);
+			Color color = RayTraceRecursive(scene, ray, maxReflect);
+			canvas->SetPixel(x, y, color);
+		}
+	}
+}

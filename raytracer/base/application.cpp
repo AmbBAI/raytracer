@@ -64,6 +64,8 @@ bool Application::CreateApplication(HINSTANCE hInstance, const char* title, int 
 
 	int posX = (workAreaWidth - wndWidth) / 2;
 	int posY = (workAreaHeight - wndHeight) / 2;
+	if (posX < 0) posX = 0;
+	if (posY < 0) posY = 0;
 
 	this->hAppWindow = CreateWindow("App Window", title, wndType,
 		posX,
@@ -73,15 +75,13 @@ bool Application::CreateApplication(HINSTANCE hInstance, const char* title, int 
 		0L, 0L, this->hAppInstance, 0L);
 	if (hAppWindow == NULL) return false;
 
-	RECT rect;
-	GetClientRect(hAppWindow, &rect);
-	this->width = rect.right - rect.left;
-	this->height = rect.bottom - rect.top;
+	this->width = width;
+	this->height = height;
 
 	UpdateWindow(hAppWindow);
 	ShowWindow(hAppWindow, SW_NORMAL);
 	return true;
-}
+} 
 
 LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {

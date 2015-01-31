@@ -11,6 +11,10 @@ namespace rt
 
 struct Material
 {
+	float reflectiveness = 0.5f;
+
+	Material(float _reflectiveness) : reflectiveness(_reflectiveness) {}
+
 	virtual const Color Sample(const Ray3& ray, const Vector3& position, const Vector3& normal) const
 	{
 		return Color::black;

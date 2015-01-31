@@ -11,7 +11,7 @@ PhongMaterial::PhongMaterial(const Color& _diffuse, const Color& _specular, floa
 	: diffuse(_diffuse)
 	, specular(_specular)
 	, shininess(_shininess)
-	, reflectiveness(_reflectiveness)
+	, Material(_reflectiveness)
 {
 }
 

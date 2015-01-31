@@ -19,6 +19,7 @@ const IntersectResult Plane::Intersect(const Ray3& ray) const
 	if (a >= 0) return IntersectResult::noHit;
 
 	float b = normal.Dot(ray.origin.Subtract(position));
+	if (b <= 0) return IntersectResult::noHit;
 
 	IntersectResult result;
 	result.geometry = this;

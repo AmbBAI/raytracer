@@ -8,12 +8,12 @@ namespace rt
 
 struct CheckerMaterial : Material
 {
-	CheckerMaterial(float scale, float reflectiveness);
+	CheckerMaterial(float _scale, float _reflectiveness);
 
 	virtual const Color Sample(const Ray3& ray, const Vector3& position, const Vector3& normal) const;
 
-	float scale;
-	float reflectiveness;
+	float scale = 0.5f;
+	//float reflectiveness;
 };
 
 }

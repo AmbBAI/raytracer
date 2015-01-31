@@ -15,7 +15,7 @@ struct PhongMaterial : Material
 	Color diffuse = Color::white;
 	Color specular = Color::white;
 	float shininess = 1.f;
-	float reflectiveness = 0.f;
+	//float reflectiveness = 0.f;
 
 	static Vector3 lightDir;
 	static Color lightColor;

@@ -48,7 +48,7 @@ const IntersectResult Union::Intersect(const Ray3& ray) const
 
 	for (int i = 0; i < geometries.size(); ++i)
 	{
-		IntersectResult result = IntersectResult::noHit;
+		IntersectResult result;
 		if (Geometry* g = geometries[i])
 		{
 			result = g->Intersect(ray);

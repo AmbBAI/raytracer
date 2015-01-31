@@ -18,5 +18,7 @@ void TestColor(rt::Canvas* canvas);
 void RenderDepth(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera, float maxDepth);
 void RenderNormal(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera);
 void RenderMaterial(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera);
+const rt::Color RayTraceRecursive(rt::Geometry& scene, const rt::Ray3& ray, int maxReflect);
+void RenderRayTraceReflection(rt::Canvas* canvas, rt::Geometry& scene, rt::Camera& camera, int maxReflect);
 
 #endif //!_HEADER_H_

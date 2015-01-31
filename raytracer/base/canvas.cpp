@@ -13,7 +13,7 @@ Canvas::Canvas(HWND hWnd, int width, int height)
 
 	if (width > 0 && height > 0)
 	{
-		pixels.assign(width * height, 0);
+		pixels.assign(width * height, Color32::black.argb);
 	}
 }
 
@@ -49,7 +49,7 @@ int Canvas::GetHeight()
 
 void Canvas::BeginDraw()
 {
-
+	pixels.assign(width * height, Color32::black.argb);
 }
 
 void Canvas::EndDraw()
