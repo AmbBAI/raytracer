@@ -24,9 +24,6 @@ const Ray3 PerspectiveCamera::GenerateRay(float x, float y) const
 {
 	Vector3 r = right.Multiply((x - 0.5f) * fovScale);
 	Vector3 u = up.Multiply((y - 0.5f) * fovScale);
-	//Vector3 tmp = front.Add(r).Add(u).Normalize();
-	//tmp = front.Add(tmp);
-	//tmp = tmp.Normalize();
 	return Ray3(eye, front.Add(r).Add(u).Normalize());
 }
 

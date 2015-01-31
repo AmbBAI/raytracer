@@ -84,6 +84,7 @@
     <ClCompile Include="camera\camera.cpp" />
     <ClCompile Include="base\canvas.cpp" />
     <ClCompile Include="base\color.cpp" />
+    <ClCompile Include="geometry\cuboid.cpp" />
     <ClCompile Include="geometry\union.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="base\mathf.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="base\header.h" />
     <ClInclude Include="base\mathf.h" />
     <ClInclude Include="base\ray3.h" />
+    <ClInclude Include="geometry\cuboid.h" />
     <ClInclude Include="geometry\union.h" />
     <ClInclude Include="material\checker_material.h" />
     <ClInclude Include="material\material.h" />

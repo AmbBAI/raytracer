@@ -8,6 +8,7 @@
 #include "geometry/geometry.h"
 #include "geometry/sphere.h"
 #include "geometry/plane.h"
+#include "geometry/cuboid.h"
 #include "geometry/union.h"
 #include "camera/camera.h"
 #include "material/material.h"

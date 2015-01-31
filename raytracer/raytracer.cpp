@@ -67,10 +67,11 @@ void RenderNormal(Canvas* canvas, Geometry& scene, Camera& camera)
 			IntersectResult result = scene.Intersect(ray);
 			if (result.geometry)
 			{
-				Color32 color = Color32::black;
-				color.r = u8((result.normal.x + 1.f) * 128);
-				color.g = u8((result.normal.y + 1.f) * 128);
-				color.b = u8((result.normal.z + 1.f) * 128);
+				Color32 color = Color32(
+					255
+					, u32((result.normal.x + 1.f) * 128)
+					, u32((result.normal.y + 1.f) * 128)
+					, u32((result.normal.z + 1.f) * 128));
 				canvas->SetPixel(x, y, color);
 			}
 		}
