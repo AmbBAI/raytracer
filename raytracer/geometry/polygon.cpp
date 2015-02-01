@@ -1,22 +1,31 @@
-#include "mesh.h"
+#include "polygon.h"
 #include "base/mathf.h"
+
+#include "thirdpart/tinyobjloader/tiny_obj_loader.h"
 
 namespace rt
 {
 
-Mesh::Mesh(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices)
+Polygon::Polygon(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices)
 	: vertices(_vertices)
 	, indices(_indices)
 {
 
 }
 
-void Mesh::Initialize()
+Polygon::Polygon(const char* objFile)
+{
+	std::vector<tinyobj::shape_t> shape;
+	std::vector<tinyobj::material_t> material;
+	std::string ret = tinyobj::LoadObj(shape, material, objFile);
+}
+
+void Polygon::Initialize()
 {
 
 }
 
-const IntersectResult Mesh::Intersect(const Ray3& ray) const
+const IntersectResult Polygon::Intersect(const Ray3& ray) const
 {
 	float minDistance = Mathf::inifinity;
 	IntersectResult minResult = IntersectResult::noHit;
@@ -38,7 +47,8 @@ const IntersectResult Mesh::Intersect(const Ray3& ray) const
 	return minResult;
 }
 
-const IntersectResult Mesh::IntersectTriangle(const Ray3& ray, const Vector3& v0, const Vector3& v1, const Vector3& v2) const
+const IntersectResult Polygon::IntersectTriangle(const Ray3& ray,
+	const Vector3& v0, const Vector3& v1, const Vector3& v2) const
 {
 	Vector3 edge1 = v1.Subtract(v0);
 	Vector3 edge2 = v2.Subtract(v0);

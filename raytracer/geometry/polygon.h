@@ -9,9 +9,10 @@
 namespace rt
 {
 
-struct Mesh : Geometry
+struct Polygon : Geometry
 {
-	Mesh(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices);
+	Polygon(const char* objFile);
+	Polygon(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices);
 
 	virtual void Initialize();
 	virtual const IntersectResult Intersect(const Ray3& ray) const;
@@ -22,17 +23,6 @@ struct Mesh : Geometry
 	const Vector3 TranslateToLocal(const Vector3& v) const;
 	bool CheckPoint(float x, float y, float z) const;
 	bool CheckPoint(const Vector3& v) const;
-
-	//Vector3 position = Vector3::zero;
-	//Vector3 up = Vector3::up;
-	//Vector3 right = Vector3::right;
-	//Vector3 front = Vector3::front;
-	//Vector3 down = Vector3::down;
-	//Vector3 left = Vector3::left;
-	//Vector3 back = Vector3::back;
-	//float length = 1.f;
-	//float width = 1.f;
-	//float height = 1.f;
 
 	std::vector<Vector3> vertices;
 	std::vector<u32> indices;

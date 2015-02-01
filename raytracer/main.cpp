@@ -15,7 +15,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	return 0;
 }
 
-const rt::Mesh CreateMesh();
+const rt::Polygon CreateMesh();
 void MainLoop()
 {
 	canvas->BeginDraw();
@@ -26,7 +26,7 @@ void MainLoop()
 	rt::CheckerMaterial checker = rt::CheckerMaterial(0.1f, 0.5f);
 	plane.material = &checker;
 
-	rt::Mesh greenObject = CreateMesh();
+	rt::Polygon greenObject = CreateMesh();
 	rt::PhongMaterial greenPhone = rt::PhongMaterial(rt::Color::green, rt::Color::white, 16.f, 0.25f);
 	greenObject.material = &greenPhone;
 
@@ -42,7 +42,7 @@ void MainLoop()
 
 	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(0, 5, 15), rt::Vector3::front, rt::Vector3::up, 90);
 
-	RenderNormal(canvas, scene, camera);
+	RenderRayTraceReflection(canvas, scene, camera, 3);
 
 	clock_t end_t = clock();
 	printf("%ld ms\n", end_t - start_t);
@@ -50,7 +50,7 @@ void MainLoop()
 	canvas->EndDraw();
 }
 
-const rt::Mesh CreateMesh()
+const rt::Polygon CreateMesh()
 {
 	std::vector<rt::Vector3> vertices;
 	std::vector<u32> indices;
@@ -76,5 +76,5 @@ const rt::Mesh CreateMesh()
 	indices.push_back(3);
 	indices.push_back(2);
 
-	return rt::Mesh(vertices, indices);
+	return rt::Polygon(vertices, indices);
 }
