@@ -15,12 +15,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	return 0;
 }
 
-float pos = 0.f;
+const rt::Mesh CreateMesh();
 void MainLoop()
 {
 	canvas->BeginDraw();
-
-	pos += 0.1f;
 
 	clock_t start_t = clock();
 
@@ -28,9 +26,9 @@ void MainLoop()
 	rt::CheckerMaterial checker = rt::CheckerMaterial(0.1f, 0.5f);
 	plane.material = &checker;
 
-	rt::Plane plane2 = rt::Plane(rt::Vector3::down, -20.f);
-	rt::CheckerMaterial checker2 = rt::CheckerMaterial(0.1f, 0.f);
-	plane2.material = &checker2;
+	rt::Mesh greenObject = CreateMesh();
+	rt::PhongMaterial greenPhone = rt::PhongMaterial(rt::Color::green, rt::Color::white, 16.f, 0.25f);
+	greenObject.material = &greenPhone;
 
 	rt::Sphere redObject = rt::Sphere(rt::Vector3(-10, 10, -10), 10.f);
 	rt::PhongMaterial redPhone = rt::PhongMaterial(rt::Color::red, rt::Color::white, 16.f, 0.25f);
@@ -40,15 +38,43 @@ void MainLoop()
 	rt::PhongMaterial bluePhone = rt::PhongMaterial(rt::Color::blue, rt::Color::white, 16.f, 0.25f);
 	blueObject.material = &bluePhone;
 
-	rt::Union scene = rt::Union(&plane, &redObject, &blueObject);
+	rt::Union scene = rt::Union(&plane, &redObject, &greenObject, &blueObject);
 
-	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(0, 10, 15), rt::Vector3::front, rt::Vector3::up, 90);
+	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(0, 5, 15), rt::Vector3::front, rt::Vector3::up, 90);
 
 	RenderNormal(canvas, scene, camera);
 
 	clock_t end_t = clock();
 	printf("%ld ms\n", end_t - start_t);
 
-
 	canvas->EndDraw();
+}
+
+const rt::Mesh CreateMesh()
+{
+	std::vector<rt::Vector3> vertices;
+	std::vector<u32> indices;
+
+	vertices.push_back(rt::Vector3(2, 8, 5));
+	vertices.push_back(rt::Vector3(2, 15, 0));
+	vertices.push_back(rt::Vector3(-3, 5, 0));
+	vertices.push_back(rt::Vector3(8, 5, 0));
+
+	indices.push_back(0);
+	indices.push_back(3);
+	indices.push_back(1);
+
+	indices.push_back(0);
+	indices.push_back(2);
+	indices.push_back(3);
+
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(2);
+
+	indices.push_back(1);
+	indices.push_back(3);
+	indices.push_back(2);
+
+	return rt::Mesh(vertices, indices);
 }

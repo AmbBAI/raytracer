@@ -37,7 +37,6 @@ private:
 	float halfWidth = 0.5f;
 	float halfLength = 0.5f;
 	float halfHeight = 0.5f;
-	float upDotup = 1.f;
 };
 
 
