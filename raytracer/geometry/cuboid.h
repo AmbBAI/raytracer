@@ -18,10 +18,6 @@ struct Cuboid : Geometry
 	virtual void Initialize();
 	virtual const IntersectResult Intersect(const Ray3& ray) const;
 
-	const Vector3 TranslateToLocal(const Vector3& v) const;
-	bool CheckPoint(float x, float y, float z) const;
-	bool CheckPoint(const Vector3& v) const;
-
 	Vector3 position = Vector3::zero;
 	Vector3 up = Vector3::up;
 	Vector3 right = Vector3::right;
@@ -33,9 +29,15 @@ struct Cuboid : Geometry
 	float width = 1.f;
 	float height = 1.f;
 
+private:
+	const Vector3 TranslateToLocal(const Vector3& v) const;
+	bool CheckPoint(float x, float y, float z) const;
+	bool CheckPoint(const Vector3& v) const;
+
 	float halfWidth = 0.5f;
 	float halfLength = 0.5f;
 	float halfHeight = 0.5f;
+	float upDotup = 1.f;
 };
 
 

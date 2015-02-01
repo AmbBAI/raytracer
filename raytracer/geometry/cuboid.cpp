@@ -15,17 +15,16 @@ Cuboid::Cuboid(const Vector3& _position, const Vector3& _up, const Vector3& _fro
 
 void Cuboid::Initialize()
 {
-	front = front.Normalize();
-	up = up.Normalize();
 	right = front.Cross(up);
-	left = up.Cross(front);
 	up = right.Cross(front);
+	left = up.Cross(front);
 	down = front.Cross(right);
 	back = right.Cross(up);
 
 	halfWidth = Mathf::Abs(width / 2.f);
 	halfLength = Mathf::Abs(length / 2.f);
 	halfHeight = Mathf::Abs(height / 2.f);
+	upDotup = up.Dot(up);
 }
 
 const IntersectResult Cuboid::Intersect(const Ray3& ray) const
@@ -112,10 +111,9 @@ const IntersectResult Cuboid::Intersect(const Ray3& ray) const
 
 const Vector3 Cuboid::TranslateToLocal(const Vector3& v) const
 {
-	return Vector3(
-		v.x * right.x + v.y * up.x + v.z * front.x,
-		v.x * right.y + v.y * up.y + v.z * front.y,
-		v.x * right.z + v.y * up.z + v.z * front.z);
+	Vector3 a = v.Cross(up);
+	Vector3 val = Vector3(a.Dot(front), -up.Dot(v), -a.Dot(right));
+	return val.Divide(-upDotup);
 }
 
 bool Cuboid::CheckPoint(float x, float y, float z) const
