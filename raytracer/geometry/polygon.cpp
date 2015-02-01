@@ -13,11 +13,30 @@ Polygon::Polygon(const std::vector<Vector3>& _vertices, const std::vector<u32>& 
 
 }
 
-Polygon::Polygon(const char* objFile)
+Polygon::Polygon(const char* objFile, int meshID)
 {
 	std::vector<tinyobj::shape_t> shape;
 	std::vector<tinyobj::material_t> material;
 	std::string ret = tinyobj::LoadObj(shape, material, objFile);
+	
+	if (ret.length() != 0)
+	{
+		printf("%s\n", ret.c_str());
+		return;
+	}
+
+	if (meshID < 0 || meshID >= shape.size()) return;
+
+	vertices.clear();
+	indices.clear();
+	tinyobj::mesh_t& mesh = shape[meshID].mesh;
+	std::vector<float>& positions = mesh.positions;
+	for (int i = 0; i + 2 < positions.size(); i += 3)
+	{
+		vertices.push_back(Vector3(positions[i], positions[i+1], positions[i+2]));
+	}
+
+	indices.insert(indices.end(), mesh.indices.begin(), mesh.indices.end());
 }
 
 void Polygon::Initialize()

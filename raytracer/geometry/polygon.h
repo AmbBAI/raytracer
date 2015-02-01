@@ -11,7 +11,7 @@ namespace rt
 
 struct Polygon : Geometry
 {
-	Polygon(const char* objFile);
+	Polygon(const char* objFile, int meshID = 0);
 	Polygon(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices);
 
 	virtual void Initialize();
