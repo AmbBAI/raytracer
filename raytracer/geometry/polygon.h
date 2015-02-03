@@ -4,6 +4,7 @@
 #include "base/header.h"
 #include "base/vector3.h"
 #include "base/ray3.h"
+#include "triangle.h"
 #include "geometry.h"
 
 namespace rt
@@ -11,21 +12,14 @@ namespace rt
 
 struct Polygon : Geometry
 {
-	Polygon(const char* objFile, int meshID = 0);
-	Polygon(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices);
+	Polygon(const char* objFile);
+	Polygon(const std::vector<Triangle>& triangles);
 
 	virtual void Initialize();
 	virtual const IntersectResult Intersect(const Ray3& ray) const;
 
-	const IntersectResult IntersectTriangle(const Ray3& ray,
-		const Vector3& v0, const Vector3& v1, const Vector3& v2) const;
-
-	const Vector3 TranslateToLocal(const Vector3& v) const;
-	bool CheckPoint(float x, float y, float z) const;
-	bool CheckPoint(const Vector3& v) const;
-
-	std::vector<Vector3> vertices;
-	std::vector<u32> indices;
+	std::vector<Triangle> triangles;
+	std::vector<Triangle*> triangles_ptr;
 };
 
 

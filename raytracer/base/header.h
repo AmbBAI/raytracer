@@ -11,6 +11,8 @@
 #include <vector>
 #include <algorithm>
 
+#include <omp.h>
+
 #include <Windows.h>
 
 typedef unsigned char u8;

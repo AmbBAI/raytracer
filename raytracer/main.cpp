@@ -2,6 +2,8 @@
 
 rt::Application* app;
 rt::Canvas* canvas;
+bool drawFinished = false;
+
 void MainLoop();
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -15,9 +17,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	return 0;
 }
 
-const rt::Polygon CreateMesh();
 void MainLoop()
 {
+	if (drawFinished) return;
+	drawFinished = true;
+
 	canvas->BeginDraw();
 
 	clock_t start_t = clock();
@@ -27,10 +31,8 @@ void MainLoop()
 	//plane.material = &checker;
 
 	rt::PhongMaterial greenPhone = rt::PhongMaterial(rt::Color::green, rt::Color::white, 16.f, 0.25f);
-	rt::Polygon teaportTop = rt::Polygon("resources/teapot/teapot.obj", 1);
-	teaportTop.material = &greenPhone;
-	rt::Polygon teaportBase = rt::Polygon("resources/teapot/teapot.obj", 0);
-	teaportBase.material = &greenPhone;
+	rt::Polygon teaport = rt::Polygon("resources/teapot/teapot.obj");
+	teaport.material = &greenPhone;
 
 	//rt::Sphere redObject = rt::Sphere(rt::Vector3(-10, 10, -10), 10.f);
 	//rt::PhongMaterial redPhone = rt::PhongMaterial(rt::Color::red, rt::Color::white, 16.f, 0.25f);
@@ -40,11 +42,11 @@ void MainLoop()
 	//rt::PhongMaterial bluePhone = rt::PhongMaterial(rt::Color::blue, rt::Color::white, 16.f, 0.25f);
 	//blueObject.material = &bluePhone;
 
-	rt::Union scene = rt::Union(&teaportTop, &teaportBase);
+	//rt::Union scene = rt::Union(&teaport);
 
 	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(0, 50, 100), rt::Vector3::front, rt::Vector3::up, 90);
 
-	RenderNormal(canvas, scene, camera);
+	RenderNormal(canvas, teaport, camera);
 
 	clock_t end_t = clock();
 	printf("%ld ms\n", end_t - start_t);
@@ -52,31 +54,3 @@ void MainLoop()
 	canvas->EndDraw();
 }
 
-const rt::Polygon CreateMesh()
-{
-	std::vector<rt::Vector3> vertices;
-	std::vector<u32> indices;
-
-	vertices.push_back(rt::Vector3(2, 8, 5));
-	vertices.push_back(rt::Vector3(2, 15, 0));
-	vertices.push_back(rt::Vector3(-3, 5, 0));
-	vertices.push_back(rt::Vector3(8, 5, 0));
-
-	indices.push_back(0);
-	indices.push_back(3);
-	indices.push_back(1);
-
-	indices.push_back(0);
-	indices.push_back(2);
-	indices.push_back(3);
-
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(2);
-
-	indices.push_back(1);
-	indices.push_back(3);
-	indices.push_back(2);
-
-	return rt::Polygon(vertices, indices);
-}

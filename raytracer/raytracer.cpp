@@ -56,8 +56,9 @@ void RenderNormal(Canvas* canvas, Geometry& scene, Camera& camera)
 	//rt::Ray3 ray = camera.GenerateRay(0.25, 0.5);
 	//rt::IntersectResult result = scene.Intersect(ray);
 
-	int i = 0;
-	for (int y = 0; y < h; ++y)
+	int y = 0;
+#pragma omp parallel for private(y)
+	for (y = 0; y < h; ++y)
 	{
 		float sy = 1.f - (float)y / h;
 		for (int x = 0; x < w; ++x)
@@ -144,11 +145,14 @@ void RenderRayTraceReflection(rt::Canvas* canvas, rt::Geometry& scene, rt::Camer
 	//rt::Ray3 ray = camera.GenerateRay(0.25, 0.5);
 	//rt::IntersectResult result = scene.Intersect(ray);
 
-	int i = 0;
-	for (int y = 0; y < h; ++y)
+	int x = 0;
+	int y = 0;
+
+#pragma omp parallel for schedule(dynamic, 1) private(x, y)
+	for (y = 0; y < h; ++y)
 	{
 		float sy = 1.f - (float)y / h;
-		for (int x = 0; x < w; ++x)
+		for (x = 0; x < w; ++x)
 		{
 			float sx = (float)x / w;
 			Ray3 ray = camera.GenerateRay(sx, sy);

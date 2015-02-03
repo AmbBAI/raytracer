@@ -6,14 +6,17 @@
 namespace rt
 {
 
-Polygon::Polygon(const std::vector<Vector3>& _vertices, const std::vector<u32>& _indices)
-	: vertices(_vertices)
-	, indices(_indices)
+Polygon::Polygon(const std::vector<Triangle>& _triangles)
+	: triangles(_triangles)
 {
-
+	triangles_ptr.assign(triangles.size(), nullptr);
+	for (int i = 0; i < triangles.size(); ++i)
+	{
+		triangles_ptr[i] = &triangles[i];
+	}
 }
 
-Polygon::Polygon(const char* objFile, int meshID)
+Polygon::Polygon(const char* objFile)
 {
 	std::vector<tinyobj::shape_t> shape;
 	std::vector<tinyobj::material_t> material;
@@ -25,18 +28,42 @@ Polygon::Polygon(const char* objFile, int meshID)
 		return;
 	}
 
-	if (meshID < 0 || meshID >= shape.size()) return;
-
-	vertices.clear();
-	indices.clear();
-	tinyobj::mesh_t& mesh = shape[meshID].mesh;
-	std::vector<float>& positions = mesh.positions;
-	for (int i = 0; i + 2 < positions.size(); i += 3)
+	triangles.clear();
+	for (int s = 0; s < shape.size(); ++s)
 	{
-		vertices.push_back(Vector3(positions[i], positions[i+1], positions[i+2]));
+		tinyobj::mesh_t& mesh = shape[s].mesh;
+		std::vector<float>& positions = mesh.positions;
+		std::vector<float>& normals = mesh.normals;
+		std::vector<u32>& indices = mesh.indices;
+
+		for (int i = 0; i + 2 < indices.size(); i+=3)
+		{
+			int a = indices[i] * 3;
+			int b = indices[i + 1] * 3;
+			int c = indices[i + 2] * 3;
+
+			Triangle triangle = Triangle(
+				Vector3(positions[a], positions[a + 1], positions[a + 2]),
+				Vector3(positions[b], positions[b + 1], positions[b + 2]),
+				Vector3(positions[c], positions[c + 1], positions[c + 2]));
+
+			if (normals.size() > 0)
+			{
+				triangle.n0 = Vector3(normals[a], normals[a + 1], normals[a + 2]);
+				triangle.n1 = Vector3(normals[b], normals[b + 1], normals[b + 2]);
+				triangle.n2 = Vector3(normals[c], normals[c + 1], normals[c + 2]);
+			}
+
+			triangles.push_back(triangle);
+
+		}
 	}
 
-	indices.insert(indices.end(), mesh.indices.begin(), mesh.indices.end());
+	triangles_ptr.assign(triangles.size(), nullptr);
+	for (int i = 0; i < triangles.size(); ++i)
+	{
+		triangles_ptr[i] = &triangles[i];
+	}
 }
 
 void Polygon::Initialize()
@@ -49,13 +76,9 @@ const IntersectResult Polygon::Intersect(const Ray3& ray) const
 	float minDistance = Mathf::inifinity;
 	IntersectResult minResult = IntersectResult::noHit;
 
-	for (int i = 0; i + 2 < indices.size(); i += 3)
+	for (int i = 0; i < triangles.size(); ++i)
 	{
-		IntersectResult result;
-		result = IntersectTriangle(ray,
-			vertices[indices[i]],
-			vertices[indices[i+1]],
-			vertices[indices[i+2]]);
+		IntersectResult result = triangles[i].Intersect(ray);
 
 		if (result.geometry && result.distance < minDistance)
 		{
@@ -65,38 +88,4 @@ const IntersectResult Polygon::Intersect(const Ray3& ray) const
 	}
 	return minResult;
 }
-
-const IntersectResult Polygon::IntersectTriangle(const Ray3& ray,
-	const Vector3& v0, const Vector3& v1, const Vector3& v2) const
-{
-	Vector3 edge1 = v1.Subtract(v0);
-	Vector3 edge2 = v2.Subtract(v0);
-	Vector3 pvec = ray.direction.Cross(edge2);
-	double det = edge1.Dot(pvec);
-
-	if (det <= 0) return IntersectResult::noHit;
-
-	Vector3 tvec = ray.origin.Subtract(v0);
-	float u = tvec.Dot(pvec);
-
-	if (u < 0 || u > det) return IntersectResult::noHit;
-
-	Vector3 qvec = tvec.Cross(edge1);
-	float v = ray.direction.Dot(qvec);
-	if (v < 0 || u + v > det) return IntersectResult::noHit;
-
-	float t = edge2.Dot(qvec);
-	float inv_det = 1. / det;
-	t *= inv_det;
-	u *= inv_det;
-	v *= inv_det;
-
-	IntersectResult result;
-	result.geometry = this;
-	result.distance = t;
-	result.position = ray.GetPoint(t);
-	result.normal = edge1.Cross(edge2).Normalize();
-	return result;
-}
-
 }

@@ -55,6 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -71,6 +72,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -86,6 +88,7 @@
     <ClCompile Include="base\color.cpp" />
     <ClCompile Include="geometry\cuboid.cpp" />
     <ClCompile Include="geometry\polygon.cpp" />
+    <ClCompile Include="geometry\triangle.cpp" />
     <ClCompile Include="geometry\union.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="base\mathf.cpp" />
@@ -108,6 +111,7 @@
     <ClInclude Include="base\ray3.h" />
     <ClInclude Include="geometry\cuboid.h" />
     <ClInclude Include="geometry\polygon.h" />
+    <ClInclude Include="geometry\triangle.h" />
     <ClInclude Include="geometry\union.h" />
     <ClInclude Include="material\checker_material.h" />
     <ClInclude Include="material\material.h" />

@@ -14,6 +14,10 @@ const Vector3 Vector3::back = Vector3(0.f, 0.f, 1.f);
 const Vector3 Vector3::down = Vector3(0.f, -1.f, 0.f);
 const Vector3 Vector3::left = Vector3(-1.f, 0.f, 0.f);
 
+Vector3::Vector3()
+{
+}
+
 Vector3::Vector3(float _x, float _y, float _z)
 	: x(_x), y(_y), z(_z)
 {
