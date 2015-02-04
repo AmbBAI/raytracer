@@ -68,24 +68,30 @@ Polygon::Polygon(const char* objFile)
 
 void Polygon::Initialize()
 {
+	for (int i = 0; i < (int)triangles.size(); ++i)
+	{
+		triangles[i].Initialize();
+	}
 
+	aabbTree = AABBTree((const std::vector<Geometry*>&)triangles_ptr, 20);
 }
 
 const IntersectResult Polygon::Intersect(const Ray3& ray) const
 {
-	float minDistance = Mathf::inifinity;
-	IntersectResult minResult = IntersectResult::noHit;
+	return aabbTree.Intersect(ray);
+	//float minDistance = Mathf::inifinity;
+	//IntersectResult minResult = IntersectResult::noHit;
 
-	for (int i = 0; i < triangles.size(); ++i)
-	{
-		IntersectResult result = triangles[i].Intersect(ray);
+	//for (int i = 0; i < triangles.size(); ++i)
+	//{
+	//	IntersectResult result = triangles[i].Intersect(ray);
 
-		if (result.geometry && result.distance < minDistance)
-		{
-			minDistance = result.distance;
-			minResult = result;
-		}
-	}
-	return minResult;
+	//	if (result.geometry && result.distance < minDistance)
+	//	{
+	//		minDistance = result.distance;
+	//		minResult = result;
+	//	}
+	//}
+	//return minResult;
 }
 }

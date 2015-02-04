@@ -82,11 +82,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base\aabb.cpp" />
+    <ClCompile Include="base\aabb_tree.cpp" />
     <ClCompile Include="base\application.cpp" />
     <ClCompile Include="camera\camera.cpp" />
     <ClCompile Include="base\canvas.cpp" />
     <ClCompile Include="base\color.cpp" />
     <ClCompile Include="geometry\cuboid.cpp" />
+    <ClCompile Include="geometry\intersect_result.cpp" />
     <ClCompile Include="geometry\polygon.cpp" />
     <ClCompile Include="geometry\triangle.cpp" />
     <ClCompile Include="geometry\union.cpp" />
@@ -102,6 +105,8 @@
     <ClCompile Include="thirdpart\tinyobjloader\tiny_obj_loader.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base\aabb.h" />
+    <ClInclude Include="base\aabb_tree.h" />
     <ClInclude Include="base\application.h" />
     <ClInclude Include="camera\camera.h" />
     <ClInclude Include="base\canvas.h" />
@@ -110,6 +115,7 @@
     <ClInclude Include="base\mathf.h" />
     <ClInclude Include="base\ray3.h" />
     <ClInclude Include="geometry\cuboid.h" />
+    <ClInclude Include="geometry\intersect_result.h" />
     <ClInclude Include="geometry\polygon.h" />
     <ClInclude Include="geometry\triangle.h" />
     <ClInclude Include="geometry\union.h" />

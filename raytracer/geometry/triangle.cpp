@@ -28,6 +28,8 @@ Triangle::Triangle(const Vector3& _v0, const Vector3& _v1, const Vector3& _v2, c
 
 void Triangle::Initialize()
 {
+	aabb = AABB(v1, v2);
+	aabb.Combine(v0);
 }
 
 const IntersectResult Triangle::Intersect(const Ray3& ray) const

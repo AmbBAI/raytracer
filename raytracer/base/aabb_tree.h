@@ -1,37 +1,38 @@
 #ifndef _RAYTRACER_AABBTREE_H_
 #define _RAYTRACER_AABBTREE_H_
 
-#include "header.h"
-#include "vector3.h"
-#include "ray3.h"
+#include "base/header.h"
+#include "base/vector3.h"
+#include "base/ray3.h"
+#include "base/aabb.h"
+#include "geometry/geometry.h"
+#include "geometry/intersect_result.h"
 
 namespace rt
 {
 
-struct AABB
-{
-	float minX, maxX;
-	float minY, maxY;
-
-	bool Intersect(const Ray3& ray);
-};
-
+struct Geometry;
 struct AABBNode
 {
 	AABB aabb;
 	std::vector<Geometry*> objs;
 
-	AABBNode* left = nullptr;
-	AABBNode* right = nullptr;
+	int left = -1;
+	int right = -1;
 };
 
 struct AABBTree
 {
+	AABBTree();
 	AABBTree(const std::vector<Geometry*>& objs, int depth);
-	AABBTree(const std::vector<Geometry*>& objs, const AABB& aabb, int depth);
+
+	void BuildTree(const std::vector<Geometry*>& objs, int depth, int idx);
+
+	const IntersectResult Intersect(const Ray3& ray) const;
+	const IntersectResult NodeIntersect(const Ray3& ray, const AABBNode& node) const;
 
 	std::vector<AABBNode> nodes;
-	int depth;
+	int auto_idx;
 };
 
 }

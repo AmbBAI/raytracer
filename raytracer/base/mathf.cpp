@@ -93,12 +93,14 @@ float Mathf::Max(const float* values, int count)
 	if (count <= 0) return 0.f;
 	if (count == 1) return values[0];
 
-	float max_value = values[0];
-	for (int i = 1; i < count; ++i)
-	{
-		max_value = Mathf::Max(max_value, values[i]);
-	}
-	return max_value;
+	return *std::max_element(values, values + count);
+
+	//float max_value = values[0];
+	//for (int i = 1; i < count; ++i)
+	//{
+	//	max_value = Mathf::Max(max_value, values[i]);
+	//}
+	//return max_value;
 }
 float Mathf::Max(const std::vector<float>& values)
 {

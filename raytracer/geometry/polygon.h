@@ -4,8 +4,10 @@
 #include "base/header.h"
 #include "base/vector3.h"
 #include "base/ray3.h"
+#include "base/aabb_tree.h"
 #include "triangle.h"
 #include "geometry.h"
+
 
 namespace rt
 {
@@ -20,6 +22,8 @@ struct Polygon : Geometry
 
 	std::vector<Triangle> triangles;
 	std::vector<Triangle*> triangles_ptr;
+
+	AABBTree aabbTree;
 };
 
 
