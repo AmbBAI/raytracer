@@ -14,10 +14,10 @@ AABBTree::AABBTree(const std::vector<Geometry*>& objs, int depth)
 {
 	assert(depth > 0);
 
-	nodes.assign((1 << depth) - 1, AABBNode());
-	
-	auto_idx = 0;
-	BuildTree(objs, depth, 0);
+	//nodes.clear();
+	//nodes.push_back(AABBNode());
+	nodes.assign(1 << depth, AABBNode());
+	BuildTree(objs, depth, auto_idx = 0);
 }
 
 void AABBTree::BuildTree(const std::vector<Geometry*>& objs, int depth, int idx)
@@ -25,16 +25,7 @@ void AABBTree::BuildTree(const std::vector<Geometry*>& objs, int depth, int idx)
 	int n = (int)objs.size();
 	assert(n > 0);
 
-	if (n == 1)
-	{
-		nodes[idx].objs = objs;
-		nodes[idx].aabb = objs[0]->aabb;
-		nodes[idx].left = -1;
-		nodes[idx].right = -1;
-		return;
-	}
-
-	if (depth == 1)
+	if (n == 1 || depth == 1)
 	{
 		nodes[idx].objs = objs;
 		nodes[idx].aabb = objs[0]->aabb;
@@ -132,13 +123,13 @@ void AABBTree::BuildTree(const std::vector<Geometry*>& objs, int depth, int idx)
 		return;
 	}
 
+	//nodes.push_back(AABBNode());
+	//int left_idx = (int)nodes.size() - 1;
+	//nodes.push_back(AABBNode());
+	//int right_idx = (int)nodes.size() - 1;
 	int left_idx = ++auto_idx;
-	int right_idx = ++auto_idx;
-
-	assert(left_idx < nodes.size());
-	assert(right_idx < nodes.size());
-
 	BuildTree(lObjs, depth - 1, left_idx);
+	int right_idx = ++auto_idx;
 	BuildTree(rObjs, depth - 1, right_idx);
 
 	nodes[idx].aabb = nodes[left_idx].aabb.Combine(nodes[right_idx].aabb);

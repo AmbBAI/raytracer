@@ -70,14 +70,8 @@ float Mathf::Min(const float* values, int count)
 {
 	if (values == nullptr) return 0.f;
 	if (count <= 0) return 0.f;
-	if (count == 1) return values[0];
 
-	float min_value = values[0];
-	for (int i = 1; i < count; ++i)
-	{
-		min_value = Mathf::Min(min_value, values[i]);
-	}
-	return min_value;
+	return *std::min_element(values, values + count);
 }
 float Mathf::Min(const std::vector<float>& values)
 {
@@ -91,16 +85,8 @@ float Mathf::Max(const float* values, int count)
 {
 	if (values == nullptr) return 0.f;
 	if (count <= 0) return 0.f;
-	if (count == 1) return values[0];
 
 	return *std::max_element(values, values + count);
-
-	//float max_value = values[0];
-	//for (int i = 1; i < count; ++i)
-	//{
-	//	max_value = Mathf::Max(max_value, values[i]);
-	//}
-	//return max_value;
 }
 float Mathf::Max(const std::vector<float>& values)
 {

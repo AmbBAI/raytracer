@@ -70,10 +70,11 @@ void Polygon::Initialize()
 {
 	for (int i = 0; i < (int)triangles.size(); ++i)
 	{
+		triangles[i].material = material;
 		triangles[i].Initialize();
 	}
 
-	aabbTree = AABBTree((const std::vector<Geometry*>&)triangles_ptr, 20);
+	aabbTree = AABBTree((const std::vector<Geometry*>&)triangles_ptr, 16);
 }
 
 const IntersectResult Polygon::Intersect(const Ray3& ray) const
