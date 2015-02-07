@@ -16,6 +16,10 @@
 
 #include <Windows.h>
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include "thirdpart/glut/glut.h"
+
 typedef unsigned char u8;
 typedef unsigned int u32;
 

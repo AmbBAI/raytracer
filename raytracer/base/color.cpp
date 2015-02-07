@@ -54,7 +54,7 @@ const Color32 Color32::white = Color32(0xffffffff);
 const Color32 Color32::black = Color32(0xff000000);
 
 Color32::Color32(u32 _argb)
-	: argb(_argb)
+	: rgba(_argb)
 {
 }
 
@@ -68,7 +68,7 @@ Color32::Color32(u32 _a, u32 _r, u32 _g, u32 _b)
 }
 
 Color32::Color32(const Color32& _color32)
-	: argb(_color32.argb)
+	: rgba(_color32.rgba)
 {
 }
 

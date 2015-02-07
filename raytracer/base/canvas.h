@@ -10,10 +10,8 @@ namespace rt
 
 class Canvas
 {
-	friend Application;
-
-protected:
-	Canvas(HWND hWnd, int width, int height);
+public:
+	Canvas(int width, int height);
 	~Canvas();
 
 public:
@@ -26,8 +24,6 @@ public:
 	void EndDraw();
 
 private:
-	HWND hWnd;
-	HDC hDC;
 	int width;
 	int height;
 

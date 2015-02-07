@@ -29,10 +29,10 @@ struct Color32
 {
 	union
 	{
-		u32 argb;
+		u32 rgba;
 		struct 
 		{
-			u8 b, g, r, a;
+			u8 r, g, b, a;
 		};
 	};
 

@@ -4,31 +4,27 @@
 namespace rt
 {
 
-Canvas::Canvas(HWND hWnd, int width, int height)
+Canvas::Canvas(int width, int height)
 {
-	this->hWnd = hWnd;
-	this->hDC = ::GetDC(hWnd);
 	this->width = width;
 	this->height = height;
 
 	if (width > 0 && height > 0)
 	{
-		pixels.assign(width * height, Color32::black.argb);
+		pixels.assign(width * height, Color32::black.rgba);
 	}
 }
 
 Canvas::~Canvas()
 {
-	::ReleaseDC(this->hWnd, this->hDC);
 }
 
 bool Canvas::SetPixel(int x, int y, const Color32& color)
 {
-	if (this->hDC == INVALID_HANDLE_VALUE) return false;
 	if (x < 0 || x >= width) return false;
 	if (y < 0 || y >= height) return false;
 
-	pixels[y * width + x] = color.argb;
+	pixels[(height - y - 1) * width + x] = color.rgba;
 	return true;
 }
 
@@ -49,18 +45,14 @@ int Canvas::GetHeight()
 
 void Canvas::BeginDraw()
 {
-	pixels.assign(width * height, Color32::black.argb);
+	pixels.assign(width * height, Color32::black.rgba);
 }
 
 void Canvas::EndDraw()
 {
-	HDC hDCMem = CreateCompatibleDC(hDC);
-	HBITMAP bitmap = ::CreateBitmap(width, height, 1, 32, &pixels[0]);
-	::SelectObject(hDCMem, bitmap);
-	
-	::BitBlt(hDC, 0, 0, width, height, hDCMem, 0, 0, SRCCOPY);
-
-	::DeleteDC(hDCMem);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, &pixels[0]);
+	glFlush();
 }
 
 

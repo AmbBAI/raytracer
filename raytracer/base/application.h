@@ -15,23 +15,17 @@ public:
 	static Application* GetInstance();
 	typedef void(*LoopFunc)();
 
+	bool CreateApplication(int argc, char *argv[], const char* title, int width, int height);
+
 	bool CreateApplication(HINSTANCE hInstance, const char* title, int width, int height);
 	void SetRunLoop(LoopFunc loopFunc) { this->loopFunc = loopFunc; }
-	void RunLoop() { MainLoop(); }
+	void RunLoop();
 
 	void SetConsoleVisible(bool isVisible);
 
 	Canvas* GetCanvas();
 
-protected:
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT	MsgProc(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bUseDefWindowsProc);
-	BOOL	PreTranslateMessage(MSG* uMsg) { return TRUE; }
-	LRESULT	MainLoop();
-
 private:
-	HWND		hAppWindow;
-	HINSTANCE	hAppInstance;
 	LoopFunc	loopFunc;
 
 	int width;

@@ -6,12 +6,12 @@ bool drawFinished = false;
 
 void MainLoop();
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int main(int argc, char *argv[])
 {
 	app = rt::Application::GetInstance();
-	app->CreateApplication(hInstance, "raytracer", 512, 512);
+	app->CreateApplication(argc, argv, "raytracer", 512, 512);
 	canvas = app->GetCanvas();
-	app->SetConsoleVisible(true);
+	//app->SetConsoleVisible(true);
 	app->SetRunLoop(MainLoop);
 	app->RunLoop();
 	return 0;
@@ -33,7 +33,7 @@ void MainLoop()
 	rt::PhongMaterial greenPhone = rt::PhongMaterial(rt::Color::green, rt::Color::white, 16.f, 0.25f);
 	rt::Polygon teapot = rt::Polygon("resources/dragon/dragon.obj");
 	//rt::Polygon teapot = rt::Polygon("resources/teapot/teapot.obj");
-	teapot.material = &greenPhone;
+	//teapot.material = &greenPhone;
 
 	//rt::Sphere redObject = rt::Sphere(rt::Vector3(-10, 10, -10), 10.f);
 	//rt::PhongMaterial redPhone = rt::PhongMaterial(rt::Color::red, rt::Color::white, 16.f, 0.25f);
@@ -45,8 +45,10 @@ void MainLoop()
 
 	//rt::Union scene = rt::Union(&teapot);
 
-	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(-100, 50, 0), rt::Vector3::right, rt::Vector3::up, 90);
+	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(-1, 0, 0), rt::Vector3::right, rt::Vector3::up, 90);
 
+
+	//TestColor(canvas);
 	RenderNormal(canvas, teapot, camera);
 
 	clock_t end_t = clock();
