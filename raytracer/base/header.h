@@ -15,16 +15,16 @@
 
 #include <omp.h>
 
-#ifdef WINDOWS
+#ifdef RT_WINDOWS
 #include <Windows.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "thirdpart/glut/glut.h"
-#elif LINUX
+#elif RT_LINUX
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#elif MACOS
+#elif RT_MACOSX
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>

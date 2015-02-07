@@ -17,18 +17,19 @@ solution "raytracer"
       flags {"Optimize"}
 
 --[[  configuration "windows"
-      defines {"WINDOWS"}
+      defines {"RT_WINDOWS"}
       links {"opengl32", "glu32", "thirdpart/glut/glut32"}
 ]]--
     configuration "linux"
-      defines {"LINUX"}
+      defines {"RT_LINUX"}
       excludes {"thirdpart/glut/glut.h"}
       buildoptions {"-std=c++11"}
       links {"GL", "GLU", "glut"}
     
     configuration "macosx"
-      defines {"MACOSX"}
+      defines {"RT_MACOSX"}
       excludes {"thirdpart/glut/glut.h"}
+      links {"OpenGL.framework", "GLUT.framework"}
 
     configuration {"linux or macosx", "DebugOMP or ReleaseOMP"}
       linkoptions {"-fopenmp"}
