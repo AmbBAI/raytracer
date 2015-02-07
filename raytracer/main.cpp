@@ -31,8 +31,8 @@ void MainLoop()
 	//plane.material = &checker;
 
 	rt::PhongMaterial greenPhone = rt::PhongMaterial(rt::Color::green, rt::Color::white, 16.f, 0.25f);
-	rt::Polygon teapot = rt::Polygon("resources/dragon/dragon.obj");
-	//rt::Polygon teapot = rt::Polygon("resources/teapot/teapot.obj");
+	//rt::Polygon teapot = rt::Polygon("resources/dragon/dragon.obj");
+	rt::Polygon teapot = rt::Polygon("resources/teapot/teapot.obj");
 	//teapot.material = &greenPhone;
 
 	//rt::Sphere redObject = rt::Sphere(rt::Vector3(-10, 10, -10), 10.f);
@@ -45,7 +45,7 @@ void MainLoop()
 
 	//rt::Union scene = rt::Union(&teapot);
 
-	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(-1, 0, 0), rt::Vector3::right, rt::Vector3::up, 90);
+	rt::PerspectiveCamera camera = rt::PerspectiveCamera(rt::Vector3(0, 50, 100), rt::Vector3::front, rt::Vector3::up, 90);
 
 
 	//TestColor(canvas);

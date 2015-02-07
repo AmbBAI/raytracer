@@ -7,6 +7,7 @@
 #define _USE_MATH_DEFINES
 #endif
 #include <cmath>
+#include <cfloat>
 #include <cassert>
 
 #include <vector>
@@ -14,11 +15,20 @@
 
 #include <omp.h>
 
+#ifdef WINDOWS
 #include <Windows.h>
-
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "thirdpart/glut/glut.h"
+#elif LINUX
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#elif MACOS
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#endif
 
 typedef unsigned char u8;
 typedef unsigned int u32;

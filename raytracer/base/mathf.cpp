@@ -15,7 +15,7 @@ float Mathf::Abs(float f)
 }
 float Mathf::Sign(float f)
 {
-	return ::signbit(f) ? -1.f : 1.f;
+	return f < 0.f ? -1.f : 1.f;
 }
 bool Mathf::Approximately(float a, float b)
 {

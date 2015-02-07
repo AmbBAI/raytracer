@@ -36,29 +36,6 @@ Canvas* Application::GetCanvas()
 	return canvas;
 }
 
-void Application::SetConsoleVisible(bool isVisible)
-{
-	if (isConsoleVisible == isVisible) return;
-
-	if (isVisible)
-	{
-		::FreeConsole();
-		if (::AllocConsole())
-		{
-			freopen("CONOUT$", "w", stdout);
-			freopen("CONOUT$", "w", stderr);
-			isConsoleVisible = isVisible;
-		}
-	}
-	else
-	{
-		if (::FreeConsole())
-		{
-			isConsoleVisible = isVisible;
-		}
-	}
-}
-
 void Application::RunLoop()
 {
 	glutDisplayFunc(loopFunc);

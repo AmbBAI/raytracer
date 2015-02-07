@@ -14,14 +14,10 @@ class Application
 public:
 	static Application* GetInstance();
 	typedef void(*LoopFunc)();
-
 	bool CreateApplication(int argc, char *argv[], const char* title, int width, int height);
 
-	bool CreateApplication(HINSTANCE hInstance, const char* title, int width, int height);
 	void SetRunLoop(LoopFunc loopFunc) { this->loopFunc = loopFunc; }
 	void RunLoop();
-
-	void SetConsoleVisible(bool isVisible);
 
 	Canvas* GetCanvas();
 
