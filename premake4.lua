@@ -16,9 +16,10 @@ solution "raytracer"
       defines {"NDEBUG", "_RELEASE"}
       flags {"Optimize"}
 
-    configuration "windows"
+--[[  configuration "windows"
       defines {"WINDOWS"}
-
+      links {"opengl32", "glu32", "thirdpart/glut/glut32"}
+]]--
     configuration "linux"
       defines {"LINUX"}
       excludes {"thirdpart/glut/glut.h"}
