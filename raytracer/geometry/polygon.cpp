@@ -95,4 +95,10 @@ const IntersectResult Polygon::Intersect(const Ray3& ray) const
 	//}
 	//return minResult;
 }
+
+void Polygon::SetTransform(const Vector3& position, const Vector3& rotation, const Vector3& scale)
+{
+	
+}
+
 }

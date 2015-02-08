@@ -93,6 +93,8 @@
     <ClCompile Include="base\aabb.cpp" />
     <ClCompile Include="base\aabb_tree.cpp" />
     <ClCompile Include="base\application.cpp" />
+    <ClCompile Include="base\matrix4x4.cpp" />
+    <ClCompile Include="base\quaternion.cpp" />
     <ClCompile Include="camera\camera.cpp" />
     <ClCompile Include="base\canvas.cpp" />
     <ClCompile Include="base\color.cpp" />
@@ -116,6 +118,8 @@
     <ClInclude Include="base\aabb.h" />
     <ClInclude Include="base\aabb_tree.h" />
     <ClInclude Include="base\application.h" />
+    <ClInclude Include="base\matrix4x4.h" />
+    <ClInclude Include="base\quaternion.h" />
     <ClInclude Include="camera\camera.h" />
     <ClInclude Include="base\canvas.h" />
     <ClInclude Include="base\color.h" />

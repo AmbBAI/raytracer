@@ -1,5 +1,5 @@
-#ifndef _RAYTRACER_MESH_H_
-#define _RAYTRACER_MESH_H_
+#ifndef _RAYTRACER_POLYGON_H_
+#define _RAYTRACER_POLYGON_H_
 
 #include "base/header.h"
 #include "base/vector3.h"
@@ -20,6 +20,8 @@ struct Polygon : Geometry
 	virtual void Initialize();
 	virtual const IntersectResult Intersect(const Ray3& ray) const;
 
+	void SetTransform(const Vector3& position, const Vector3& rotation, const Vector3& scale);
+
 	std::vector<Triangle> triangles;
 	std::vector<Triangle*> triangles_ptr;
 
@@ -29,4 +31,4 @@ struct Polygon : Geometry
 
 }
 
-#endif //!_RAYTRACER_CUBOID_H_
+#endif //!_RAYTRACER_POLYGON_H_
