@@ -8,8 +8,11 @@ namespace rt
 
 struct Vector3
 {
-	float x, y, z;
-	Vector3();
+	float x = 0.f;
+	float y = 0.f;
+	float z = 0.f;
+
+	Vector3() = default;
 	Vector3(float _x, float _y, float _z);
 	Vector3(const Vector3& v);
 

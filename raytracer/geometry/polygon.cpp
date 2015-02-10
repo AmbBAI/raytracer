@@ -79,7 +79,17 @@ void Polygon::Initialize()
 
 const IntersectResult Polygon::Intersect(const Ray3& ray) const
 {
-	return aabbTree.Intersect(ray);
+	Ray3 retRay = ray;
+	retRay.origin = invTransform.MultiplyPoint(ray.origin);
+	retRay.direction = invTransform.MultiplyVector(ray.direction);
+
+	IntersectResult ret = aabbTree.Intersect(retRay);
+	if (ret.geometry != nullptr)
+	{
+		ret.position = transform.MultiplyPoint(ret.position);
+		ret.normal = transform.MultiplyVector(ret.normal).Normalize();
+	}
+	return ret;
 	//float minDistance = Mathf::inifinity;
 	//IntersectResult minResult = IntersectResult::noHit;
 
@@ -98,7 +108,8 @@ const IntersectResult Polygon::Intersect(const Ray3& ray) const
 
 void Polygon::SetTransform(const Vector3& position, const Vector3& rotation, const Vector3& scale)
 {
-	
+	transform = Matrix4x4(position, Quaternion(rotation), scale);
+	invTransform = transform.Inverse();
 }
 
 }

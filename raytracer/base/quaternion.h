@@ -10,7 +10,7 @@ struct Quaternion
 	float x = 0.f;
 	float y = 0.f;
 	float z = 0.f;
-	float w = 0.f;
+	float w = 1.f;
 
 	Quaternion() = default;
 	Quaternion(const Vector3& eulerAngle);
@@ -18,7 +18,7 @@ struct Quaternion
 
 	void SetEulerAngle(float _x, float _y, float _z);
 	void SetEulerAngle(const Vector3& euler_angle);
-	const Vector3& GetEulerAngle();
+	const Vector3 GetEulerAngle();
 
 	static const Quaternion identity;
 };

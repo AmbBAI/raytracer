@@ -4,7 +4,7 @@
 namespace rt
 {
 
-const Quaternion Quaternion::identity = Quaternion(0.f, 0.f, 0.f, 1.f);
+const Quaternion Quaternion::identity = Quaternion();
 
 Quaternion::Quaternion(float _x, float _y, float _z, float _w)
 	: x(_x)
@@ -13,6 +13,11 @@ Quaternion::Quaternion(float _x, float _y, float _z, float _w)
 	, w(_w)
 {
 
+}
+
+Quaternion::Quaternion(const Vector3& eulerAngle)
+{
+	SetEulerAngle(eulerAngle.x, eulerAngle.y, eulerAngle.z);
 }
 
 void Quaternion::SetEulerAngle(float _x, float _y, float _z)
@@ -30,7 +35,7 @@ void Quaternion::SetEulerAngle(float _x, float _y, float _z)
 	x = sin_x_2 * cos_y_2 * cos_z_2 + cos_x_2 * sin_y_2 * sin_z_2;
 	y = cos_x_2 * sin_y_2 * cos_z_2 + sin_x_2 * cos_y_2 * sin_z_2;
 	z = cos_x_2 * cos_y_2 * sin_z_2 + sin_x_2 * sin_y_2 * cos_z_2;
-	w = cos_x_2 * cos_y_2 * cos_z_2 + sin_x_2 * sin_y_2 + sin_z_2;
+	w = cos_x_2 * cos_y_2 * cos_z_2 + sin_x_2 * sin_y_2 * sin_z_2;
 }
 
 void Quaternion::SetEulerAngle(const Vector3& euler_angle)
@@ -38,7 +43,7 @@ void Quaternion::SetEulerAngle(const Vector3& euler_angle)
 	SetEulerAngle(euler_angle.x, euler_angle.y, euler_angle.z);
 }
 
-const Vector3& Quaternion::GetEulerAngle()
+const Vector3 Quaternion::GetEulerAngle()
 {
 	float radx = Mathf::Atan2(2.f * (w * x + y * z), 1.f - 2.f * (x * x + y * y));
 	float rady = Mathf::Asin(2.f * (w * y + x * z));

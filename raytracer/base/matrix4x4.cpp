@@ -4,7 +4,7 @@
 namespace rt
 {
 
-const Matrix4x4 Matrix4x4::identity = Matrix4x4(Vector3::zero, Quaternion::identity, Vector3::one);
+const Matrix4x4 Matrix4x4::identity = Matrix4x4(Vector3(), Quaternion(), Vector3(1.f, 1.f, 1.f));
 
 Matrix4x4::Matrix4x4(float* _m)
 {
@@ -16,23 +16,24 @@ Matrix4x4::Matrix4x4(const Vector3& p, const Quaternion& q, const Vector3& s)
 	Matrix4x4::Identity();
 
 	Matrix4x4 pMat, rMat, sMat;
-	pMat.AssignScaling(s);
+	sMat.AssignScaling(s);
 	rMat.AssignRotation(q);
-	sMat.AssignTranslation(p);
+	pMat.AssignTranslation(p);
 
-	(*this) = pMat * rMat * sMat;
+	(*this) = sMat * rMat * pMat;
 
 }
 
 void Matrix4x4::Fill(float val)
 {
-	memcpy(m, &val, sizeof(float) * 16);
+	std::fill(m, m+16, val);
+	//memcpy(m, &val, sizeof(float) * 16);
 }
 
 void Matrix4x4::Identity()
 {
 	Matrix4x4::Fill(0.f);
-	m[0] = m[5] = m[10] = m[15];
+	m[0] = m[5] = m[10] = m[15] = 1.f;
 }
 
 bool Matrix4x4::IsIdentity()
@@ -410,6 +411,26 @@ const Matrix4x4 Matrix4x4::Transpose() const
 	}
 
 	return mat;
+}
+
+const Vector3& Matrix4x4::MultiplyPoint(const Vector3& p) const
+{
+	int px = p.x - m[12];
+	int py = p.y - m[13];
+	int pz = p.z - m[14];
+
+	return Vector3(
+		m[0] * px + m[1] * py + m[2] * pz,
+		m[4] * px + m[5] * py + m[6] * pz,
+		m[8] * px + m[9] * py + m[10] * pz);
+}
+
+const Vector3& Matrix4x4::MultiplyVector(const Vector3& p) const
+{
+	return Vector3(
+		m[0] * p.x + m[1] * p.y + m[2] * p.z,
+		m[4] * p.x + m[5] * p.y + m[6] * p.z,
+		m[8] * p.x + m[9] * p.y + m[10] * p.z);
 }
 
 

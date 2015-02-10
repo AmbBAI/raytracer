@@ -5,6 +5,7 @@
 #include "base/vector3.h"
 #include "base/ray3.h"
 #include "base/aabb_tree.h"
+#include "base/matrix4x4.h"
 #include "triangle.h"
 #include "geometry.h"
 
@@ -26,6 +27,10 @@ struct Polygon : Geometry
 	std::vector<Triangle*> triangles_ptr;
 
 	AABBTree aabbTree;
+
+	Matrix4x4 transform;
+	Matrix4x4 invTransform;
+
 };
 
 
