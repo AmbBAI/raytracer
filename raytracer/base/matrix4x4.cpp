@@ -413,11 +413,11 @@ const Matrix4x4 Matrix4x4::Transpose() const
 	return mat;
 }
 
-const Vector3& Matrix4x4::MultiplyPoint(const Vector3& p) const
+const Vector3 Matrix4x4::MultiplyPoint(const Vector3& p) const
 {
-	int px = p.x - m[12];
-	int py = p.y - m[13];
-	int pz = p.z - m[14];
+	float px = p.x - m[12];
+	float py = p.y - m[13];
+	float pz = p.z - m[14];
 
 	return Vector3(
 		m[0] * px + m[1] * py + m[2] * pz,
@@ -425,7 +425,7 @@ const Vector3& Matrix4x4::MultiplyPoint(const Vector3& p) const
 		m[8] * px + m[9] * py + m[10] * pz);
 }
 
-const Vector3& Matrix4x4::MultiplyVector(const Vector3& p) const
+const Vector3 Matrix4x4::MultiplyVector(const Vector3& p) const
 {
 	return Vector3(
 		m[0] * p.x + m[1] * p.y + m[2] * p.z,

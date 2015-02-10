@@ -4,12 +4,6 @@
 namespace rt
 {
 
-
-AABBTree::AABBTree()
-{
-
-}
-
 AABBTree::AABBTree(const std::vector<Geometry*>& objs, int depth)
 {
 	assert(depth > 0);

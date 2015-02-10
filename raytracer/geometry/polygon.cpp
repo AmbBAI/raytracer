@@ -10,7 +10,7 @@ Polygon::Polygon(const std::vector<Triangle>& _triangles)
 	: triangles(_triangles)
 {
 	triangles_ptr.assign(triangles.size(), nullptr);
-	for (int i = 0; i < triangles.size(); ++i)
+	for (int i = 0; i < (int)triangles.size(); ++i)
 	{
 		triangles_ptr[i] = &triangles[i];
 	}
@@ -29,14 +29,14 @@ Polygon::Polygon(const char* objFile)
 	}
 
 	triangles.clear();
-	for (int s = 0; s < shape.size(); ++s)
+	for (int s = 0; s < (int)shape.size(); ++s)
 	{
 		tinyobj::mesh_t& mesh = shape[s].mesh;
 		std::vector<float>& positions = mesh.positions;
 		std::vector<float>& normals = mesh.normals;
 		std::vector<u32>& indices = mesh.indices;
 
-		for (int i = 0; i + 2 < indices.size(); i+=3)
+		for (int i = 0; i + 2 < (int)indices.size(); i+=3)
 		{
 			int a = indices[i] * 3;
 			int b = indices[i + 1] * 3;
@@ -60,7 +60,7 @@ Polygon::Polygon(const char* objFile)
 	}
 
 	triangles_ptr.assign(triangles.size(), nullptr);
-	for (int i = 0; i < triangles.size(); ++i)
+	for (int i = 0; i < (int)triangles.size(); ++i)
 	{
 		triangles_ptr[i] = &triangles[i];
 	}

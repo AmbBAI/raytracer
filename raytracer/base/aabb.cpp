@@ -4,11 +4,6 @@
 namespace rt
 {
 
-AABB::AABB()
-{
-}
-
-
 AABB::AABB(float _minX, float _minY, float _minZ,
 	float _maxX, float _maxY, float _maxZ)
 {

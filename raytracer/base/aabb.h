@@ -10,13 +10,13 @@ namespace rt
 
 struct AABB
 {
-	float minX, maxX;
-	float minY, maxY;
-	float minZ, maxZ;
+	float minX = 0.f, maxX = 0.f;
+	float minY = 0.f, maxY = 0.f;
+	float minZ = 0.f, maxZ = 0.f;
 
-	float centerX, centerY, centerZ;
+	float centerX = 0.f, centerY = 0.f, centerZ = 0.f;
 
-	AABB();
+	AABB() = default;
 	AABB(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
 	AABB(const Vector3& p);
 	AABB(const Vector3& p1, const Vector3& p2);

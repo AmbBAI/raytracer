@@ -32,7 +32,7 @@ Union::Union(Geometry* g1, Geometry* g2, Geometry* g3, Geometry* g4)
 
 void Union::Initialize()
 {
-	for (int i = 0; i < geometries.size(); ++i)
+	for (int i = 0; i < (int)geometries.size(); ++i)
 	{
 		if (Geometry* g = geometries[i])
 		{
@@ -46,7 +46,7 @@ const IntersectResult Union::Intersect(const Ray3& ray) const
 	float minDistance = Mathf::inifinity;
 	IntersectResult minResult = IntersectResult::noHit;
 
-	for (int i = 0; i < geometries.size(); ++i)
+	for (int i = 0; i < (int)geometries.size(); ++i)
 	{
 		IntersectResult result;
 		if (Geometry* g = geometries[i])

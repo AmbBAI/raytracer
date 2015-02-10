@@ -23,7 +23,7 @@ struct AABBNode
 
 struct AABBTree
 {
-	AABBTree();
+	AABBTree() = default;
 	AABBTree(const std::vector<Geometry*>& objs, int depth);
 
 	void BuildTree(const std::vector<Geometry*>& objs, int depth, int idx);
@@ -32,7 +32,7 @@ struct AABBTree
 	const IntersectResult NodeIntersect(const Ray3& ray, const AABBNode& node) const;
 
 	std::vector<AABBNode> nodes;
-	int auto_idx;
+	int auto_idx = 0;
 };
 
 }
