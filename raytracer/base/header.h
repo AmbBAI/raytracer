@@ -13,14 +13,14 @@
 #include <vector>
 #include <algorithm>
 
-#include <omp.h>
-
 #ifdef RT_WINDOWS
 #include <Windows.h>
+#include <omp.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "thirdpart/glut/glut.h"
 #elif RT_LINUX
+#include <omp.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>

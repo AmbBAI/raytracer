@@ -29,6 +29,7 @@ solution "raytracer"
     configuration "macosx"
       defines {"RT_MACOSX"}
       excludes {"thirdpart/glut/glut.h"}
+      buildoptions {"-std=c++11", "-Wno-deprecated-declarations"}
       links {"OpenGL.framework", "GLUT.framework"}
 
     configuration {"linux or macosx", "DebugOMP or ReleaseOMP"}
