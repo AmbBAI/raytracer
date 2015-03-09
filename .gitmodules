@@ -1,0 +1,3 @@
+[submodule "raytracer/thirdpart/glfw"]
+	path = raytracer/thirdpart/glfw
+	url = https://github.com/glfw/glfw.git
