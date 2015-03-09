@@ -21,11 +21,14 @@ Application* Application::GetInstance()
 
 bool Application::CreateApplication(int argc, char *argv[], const char* title, int width, int height)
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
-	glutInitWindowSize(width, height);
-	glutCreateWindow(title);
-	this->width = width;
+    if (!glfwInit()) return false;
+
+    window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+    if (!window) return false;
+    
+    glfwMakeContextCurrent(window);
+	
+    this->width = width;
 	this->height = height;
 	return true;
 }
@@ -38,8 +41,12 @@ Canvas* Application::GetCanvas()
 
 void Application::RunLoop()
 {
-	glutDisplayFunc(loopFunc);
-	glutMainLoop();
+    assert(window != nullptr);
+	while (!glfwWindowShouldClose(window))
+    {
+        if (loopFunc != nullptr) loopFunc();
+    }
+    glfwTerminate();
 }
 
 }

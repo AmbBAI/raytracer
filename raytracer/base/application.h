@@ -24,6 +24,8 @@ public:
 private:
 	LoopFunc	loopFunc;
 
+    GLFWwindow* window;
+    
 	int width;
 	int height;
 

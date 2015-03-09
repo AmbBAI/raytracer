@@ -13,22 +13,21 @@
 #include <vector>
 #include <algorithm>
 
+
 #ifdef RT_WINDOWS
 #include <Windows.h>
 #include <omp.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include "thirdpart/glut/glut.h"
+#define _GLFW_WIN32
 #elif RT_LINUX
 #include <omp.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
+#define _GLFW_X11
 #elif RT_MACOSX
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
+#define _GLFW_COCOA
 #endif
+
+#define _GLFW_USE_OPENGL
+#include "thirdpart/glfw/include/GLFW/glfw3.h"
+
 
 typedef unsigned char u8;
 typedef unsigned int u32;
