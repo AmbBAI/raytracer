@@ -23,6 +23,8 @@ bool Application::CreateApplication(int argc, char *argv[], const char* title, i
 {
     if (!glfwInit()) return false;
 
+	glfwWindowHint(GLFW_DOUBLEBUFFER, 0);
+	glfwWindowHint(GLFW_RESIZABLE, 0);
     window = glfwCreateWindow(width, height, title, nullptr, nullptr);
     if (!window) return false;
     
@@ -45,6 +47,7 @@ void Application::RunLoop()
 	while (!glfwWindowShouldClose(window))
     {
         if (loopFunc != nullptr) loopFunc();
+		glfwPollEvents();
     }
     glfwTerminate();
 }

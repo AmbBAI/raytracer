@@ -34,7 +34,7 @@ void Triangle::Initialize()
 const IntersectResult Triangle::Intersect(const Ray3& ray) const
 {
 	Vector3 pvec = ray.direction.Cross(e2);
-	double det = e1.Dot(pvec);
+	float det = e1.Dot(pvec);
 
 	if (det <= 0) return IntersectResult::noHit;
 
@@ -48,7 +48,7 @@ const IntersectResult Triangle::Intersect(const Ray3& ray) const
 	if (v < 0 || u + v > det) return IntersectResult::noHit;
 
 	float t = e2.Dot(qvec);
-	float inv_det = 1. / det;
+	float inv_det = 1.f / det;
 	t *= inv_det;
 	u *= inv_det;
 	v *= inv_det;

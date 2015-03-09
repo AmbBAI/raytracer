@@ -15,17 +15,12 @@
 
 
 #ifdef RT_WINDOWS
-#include <Windows.h>
 #include <omp.h>
-#define _GLFW_WIN32
 #elif RT_LINUX
 #include <omp.h>
-#define _GLFW_X11
 #elif RT_MACOSX
-#define _GLFW_COCOA
 #endif
 
-#define _GLFW_USE_OPENGL
 #include "thirdpart/glfw/include/GLFW/glfw3.h"
 
 
