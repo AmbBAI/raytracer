@@ -21,7 +21,7 @@
 #elif RT_MACOSX
 #endif
 
-#include "thirdpart/glfw/include/GLFW/glfw3.h"
+#include "../thirdpart/glfw/include/GLFW/glfw3.h"
 
 
 typedef unsigned char u8;
