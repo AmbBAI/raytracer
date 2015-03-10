@@ -14,14 +14,14 @@
 #include <algorithm>
 
 
-#ifdef RT_WINDOWS
-#include <omp.h>
-#elif RT_LINUX
-#include <omp.h>
-#elif RT_MACOSX
-#endif
+//#ifdef RT_WIN32
+//#include <omp.h>
+//#elif RT_LINUX
+//#include <omp.h>
+//#elif RT_MACOSX
+//#endif
 
-#include "../thirdpart/glfw/include/GLFW/glfw3.h"
+#include "glfw/include/GLFW/glfw3.h"
 
 
 typedef unsigned char u8;
