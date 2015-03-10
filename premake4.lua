@@ -13,7 +13,7 @@ solution "raytracer"
 
   project "raytracer"
     kind "ConsoleApp"
-    includedirs {"raytracer/"}
+    includedirs {"raytracer/", "thirdpart/"}
     targetdir ("bin/")
     libdirs {"lib/"}
     files {
@@ -34,6 +34,7 @@ solution "raytracer"
 
     configuration "windows"
         defines { "_CRT_SECURE_NO_WARNINGS" }
+        links {"opengl32.lib"}
 
     configuration "macosx"
       buildoptions {"-std=c++11", "-Wno-deprecated-declarations"}
