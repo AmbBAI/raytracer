@@ -2,11 +2,11 @@
 #define _RAYTRACER_APPLICATION_H_
 
 #include "header.h"
+#include "color.h"
 
 namespace rt
 {
 
-class Canvas;
 class Application
 {
 	Application();
@@ -14,22 +14,24 @@ class Application
 public:
 	static Application* GetInstance();
 	typedef void(*LoopFunc)();
-	bool CreateApplication(int argc, char *argv[], const char* title, int width, int height);
+	bool CreateApplication(const char* title, int width, int height);
+	int GetWidth() const { return width; }
+	int GetHeight() const { return height; }
 
-	void SetRunLoop(LoopFunc loopFunc) { this->loopFunc = loopFunc; }
-	void RunLoop();
+	void RunLoop(LoopFunc loopFunc);
 
-	Canvas* GetCanvas();
+	void Clear(Color32 color);
+	void Submit();
+	bool SetPixel(int x, int y, const Color32& color);
+	bool SetPixel(int x, int y, const Color& color);
 
 private:
-	LoopFunc	loopFunc;
-
     GLFWwindow* window;
-    
+
+	std::vector<u32> pixels;
+
 	int width;
 	int height;
-
-	bool isConsoleVisible;
 };
 
 }

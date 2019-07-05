@@ -1,6 +1,4 @@
-[submodule "thirdpart/glfw"]
+[submodule "glfw"]
 	path = thirdpart/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "thirdpart/tinyobjloader"]
-	path = thirdpart/tinyobjloader
-	url = https://github.com/syoyo/tinyobjloader.git
+	branch = 3.3-stable
